@@ -62,11 +62,15 @@ public class PizzeriaAdminConsoleApp {
 				
 				// creation du tableau temporaire de pizza et attribution des valeurs de l'ancien tableau
 				Pizza [] pizzasTemp = new Pizza[pizzas.length+1];			
-				pizzasTemp = pizzas;
+				System.out.println(pizzasTemp.length);
+				for(int i = 0; i<pizzas.length; i++) {
+					pizzasTemp[i] = pizzas[i];
+					
+				}
 				
 				// changment de la taille de l'ancien tableau et recuperation des anciennes valeurs
-				pizzas = new Pizza[pizzasTemp.length];
 				pizzas = pizzasTemp;
+				
 				
 				// rajout a la fin du tableau de la nouvelle pizza
 				Pizza pizzaToAdd = new Pizza(code, nom, prix);
@@ -94,9 +98,10 @@ public class PizzeriaAdminConsoleApp {
 				// instanciation d'une nouvelle pizza pour la modifier
 				Pizza pizzaToModif = new Pizza();
 				
-				
+				System.out.println(codePizza);
 				// recuperation de la pizza a modifier dans le tableau
 				for (Pizza pizza : pizzas) {
+					System.out.println(pizza.getCode());
 					if(pizza.getCode().equals(codePizza)) {
 						pizzaToModif = pizza;
 						
@@ -122,8 +127,6 @@ public class PizzeriaAdminConsoleApp {
 						//rajout au tableau
 						pizzas[pizzaToModif.getId()] = pizzaToModif;
 						
-					} else {
-						System.out.println("Ce code n'existe pas");
 					}
 					
 				}
@@ -157,7 +160,7 @@ public class PizzeriaAdminConsoleApp {
 					// modification de la taille de l'ancien tableau et copie des données
 					pizzas = new Pizza[pizzasTemp2.length];
 					pizzas = pizzasTemp2;
-
+					
 					break;
 			case 99:
 				System.out.println(" Au revoir");
