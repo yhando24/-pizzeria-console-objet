@@ -1,5 +1,7 @@
 package classe;
 
+import exception.StockageException;
+
 /**
  * 
  * @author Youcef Handoura	
@@ -18,6 +20,12 @@ public class Pizza {
 	private double prix;
 	
 	private static  int compteur = 0;
+	
+	
+	
+	 private final int CODE_LENGHT = 4;
+	 private final int PRIX_MAX = 100;
+	 private final int PRIX_MIN = 5;
 	
 	/**
 	 * 
@@ -99,6 +107,25 @@ public class Pizza {
 		return code + " -> " + désignation + "("+ prix + "€)";
 	}
 	
-	
+	public void dataControl() throws StockageException{
+		
+		String message = "";
+		
+		if(this.id<0) {
+			message += " l'id ne peut pas etre négatif. \r\n";
+		}
+		
+		if(this.code.trim().length()> CODE_LENGHT) {
+			message += " le code ne peut pas avoir plus de " + CODE_LENGHT + " caracteres. \r\n";
+		}
+		if(this.prix<PRIX_MIN || this.prix > PRIX_MAX) {
+			message +=  " le prix doit etre compris entre " + PRIX_MIN + " et " + PRIX_MAX + ". \r\n";
+		}
+		
+		if(!message.isEmpty() ||  message.trim().length() > 0) {
+			System.out.println("dans le dataControle");
+			throw new StockageException(message);
+		}
+	}
 	
 }

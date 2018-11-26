@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.cedarsoft</groupId>
+    <artifactId>dependencies-sets</artifactId>
+    <version>8.7.0</version>
+  </parent>
+  <groupId>com.cedarsoft.dependencies-sets</groupId>
+  <artifactId>openjfx</artifactId>
+  <version>8.7.0</version>
+  <packaging>pom</packaging>
+  <name>dependencies-set.OpenJFX</name>
+  <description>Contains the dependencies for OpenJFX</description>
+  <profiles>
+    <profile>
+      <id>jdk11</id>
+      <activation>
+        <jdk>11</jdk>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-controls</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-swing</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-fxml</artifactId>
+          <classifier>${javafx.platform}</classifier>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+</project>

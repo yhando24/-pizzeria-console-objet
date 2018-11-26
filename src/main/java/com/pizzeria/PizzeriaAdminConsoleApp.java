@@ -1,14 +1,41 @@
 package com.pizzeria;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Dao.PizzaMemDao;
 import classe.Pizza;
+import exception.DeletePizzaException;
+import exception.SavePizzaException;
+import exception.UpdatePizzaException;
+import javafx.application.Application; 
+import javafx.scene.Scene; 
+import javafx.scene.layout.Pane; 
+import javafx.scene.paint.Color; 
+import javafx.scene.shape.Rectangle; 
+import javafx.stage.Stage; 
+import javafx.application.Application; 
+import javafx.scene.Scene; 
+import javafx.scene.layout.Pane; 
+import javafx.scene.paint.Color; 
+import javafx.scene.shape.Rectangle; 
+import javafx.stage.Stage; 
+import javafx.application.Application; 
+import javafx.scene.Scene; 
+import javafx.scene.layout.Pane; 
+import javafx.scene.paint.Color; 
+import javafx.scene.shape.Rectangle; 
+import javafx.stage.Stage; 
+  
 
-public class PizzeriaAdminConsoleApp {
 
-	public static void main(String[] args) {
+
+public class PizzeriaAdminConsoleApp  {
+
+	public static void main(String[] args) throws UpdatePizzaException  {
 		
+		
+	
 		PizzaMemDao dao = new PizzaMemDao();
 		
 		Pizza [] pizzas = dao.findAllPizzas();
@@ -50,16 +77,20 @@ public class PizzeriaAdminConsoleApp {
 				
 				Pizza pizzaToAdd = new Pizza(code, nom, prix);
 				
-				dao.addPizza(pizzaToAdd);
-
+				try {
+					dao.addPizza(pizzaToAdd);
+				} catch (SavePizzaException e1) {
 				
+				System.out.println(e1.getMessage());
+
+				}
 				break;
 				
 			case 3:
 				
 				
 				System.out.println(" Mise à jour d'une pizza");
-				
+		
 				// remise a 0 du scanner
 				sc.nextLine();
 				
@@ -85,8 +116,13 @@ public class PizzeriaAdminConsoleApp {
 				pizzaToModif.setDésignation(newNom);
 				pizzaToModif.setPrix(newPrix);
 				
-			
-				dao.updatePizza(codePizza, pizzaToModif);
+				
+				try{
+					dao.updatePizza(codePizza, pizzaToModif);
+				}catch(UpdatePizzaException e) {
+					
+					System.out.println(e.getMessage());
+				}
 
 				break;
 				
@@ -100,7 +136,11 @@ public class PizzeriaAdminConsoleApp {
 				
 				String codePizzaAsupprimer = sc.nextLine();
 					
-				dao.deletePizza(codePizzaAsupprimer);
+				try {
+					dao.deletePizza(codePizzaAsupprimer);
+				} catch (DeletePizzaException e) {
+				 System.out.println(e.getMessage());
+				}
 			
 					break;
 			case 99:
@@ -115,5 +155,11 @@ public class PizzeriaAdminConsoleApp {
 		}
 		
 	}
+
+
+  
+
+	
+	
 
 }

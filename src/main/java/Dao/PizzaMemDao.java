@@ -1,6 +1,10 @@
 package Dao;
 
 import classe.Pizza;
+import exception.DeletePizzaException;
+import exception.SavePizzaException;
+import exception.StockageException;
+import exception.UpdatePizzaException;
 
 public class  PizzaMemDao implements IPizzaDao{
 	
@@ -36,9 +40,24 @@ public class  PizzaMemDao implements IPizzaDao{
 	
 
 	
-	public void updatePizza(String codePizza, Pizza pizzaToModif) {	
+	public void updatePizza(String codePizza, Pizza pizzaToModif) throws UpdatePizzaException {	
 		Pizza pizza = findPizzaByCode(codePizza);
-		pizzas[pizza.getId()] = pizzaToModif;
+		Boolean exist = isPizzaExists(codePizza);
+		Boolean sucess = true;
+		if(exist) {
+			try {
+				pizzaToModif.dataControl();
+			} catch (StockageException e) {
+				sucess = false;
+			}
+			if(sucess) {
+				pizzas[pizza.getId()] = pizzaToModif;
+				}
+		}
+		else {
+			throw new UpdatePizzaException("La pizza n'existe pas");
+		}
+		
 	}
 
 	
@@ -64,8 +83,19 @@ public class  PizzaMemDao implements IPizzaDao{
 
 	
 	
-	public void addPizza(Pizza pizza) {
-	
+	public void addPizza(Pizza pizza) throws SavePizzaException {
+		
+		
+		boolean success = true;
+		
+		
+		try {
+			pizza.dataControl();
+		} catch (StockageException e) {
+			System.out.println("DASDQDQSDDSDd");
+			success = false;
+		}
+		
 		// creation du tableau temporaire de pizza et attribution des valeurs de l'ancien tableau
 		Pizza [] pizzasTemp = new Pizza[pizzas.length+1];			
 		System.out.println(pizzasTemp.length);
@@ -79,16 +109,22 @@ public class  PizzaMemDao implements IPizzaDao{
 		
 		
 		// rajout a la fin du tableau de la nouvelle pizza
-	
-		pizzas[pizzas.length-1] = pizza;
+
+		
+		
+		if(success) {
+			pizzas[pizzas.length-1] = pizza;
+		}
+
 		
 	}
 
-	public void deletePizza(String codePizza) {
+	public void deletePizza(String codePizza) throws DeletePizzaException{
 		
+		Boolean exist = isPizzaExists(codePizza);
 		
-		
-		
+		if(exist) {
+			
 		
 		// creation d'un tableau temporaire plus petit que l'ancien
 		Pizza [] pizzasTemp2 = new Pizza[pizzas.length-1];
@@ -111,6 +147,11 @@ public class  PizzaMemDao implements IPizzaDao{
 		
 		
 		System.out.println("Pizza supprimé");
+		} else {
+			throw new DeletePizzaException("Le code de la pizza entrer n'existe pas");
+			
+		}
+		
 	}
 
 
