@@ -13,7 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane; 
 import javafx.scene.paint.Color; 
 import javafx.scene.shape.Rectangle; 
-import javafx.stage.Stage; 
+import javafx.stage.Stage;
+import model.PizzaEnum;
 import javafx.application.Application; 
 import javafx.scene.Scene; 
 import javafx.scene.layout.Pane; 
@@ -74,15 +75,33 @@ public class PizzeriaAdminConsoleApp  {
 							
 				System.out.println(" Veuillez saisir le prix :");	
 				double prix = sc.nextDouble();
+				sc.nextLine();
+				System.out.println(" Veuillez saisir la categorie :");	
+			
+			
 				
-				Pizza pizzaToAdd = new Pizza(code, nom, prix);
+			
+				
 				
 				try {
+					// verification du type de pizza et presence du type
+					PizzaEnum type = PizzaEnum.valueOf(sc.nextLine().toUpperCase());
+					Pizza pizzaToAdd = new Pizza(code, nom, prix, type);
 					dao.addPizza(pizzaToAdd);
 				} catch (SavePizzaException e1) {
 				
 				System.out.println(e1.getMessage());
-
+					
+				// si le type de pizza existe pas on le met dans autre
+				} catch (IllegalArgumentException et) {
+					System.out.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
+					Pizza pizzaToAdd = new Pizza(code, nom, prix, PizzaEnum.AUTRE);
+					try {
+						dao.addPizza(pizzaToAdd);
+					} catch (SavePizzaException e) {
+						System.out.println(e.getMessage());
+					
+					}
 				}
 				break;
 				
@@ -107,7 +126,17 @@ public class PizzeriaAdminConsoleApp  {
 				String newNom = sc.nextLine();			
 				System.out.println(" Veuillez saisir le nouveau prix :");
 				Double newPrix = sc.nextDouble();
+				sc.nextLine();
+				System.out.println(" Veuillez saisir la categorie :");	
+				PizzaEnum type;
 				
+				try {
+					// verification du type de pizza et presence du type
+					 type = PizzaEnum.valueOf(sc.nextLine().toUpperCase());
+				}catch (IllegalArgumentException et) {
+					System.out.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
+					 type = PizzaEnum.AUTRE;
+				}
 				// instanciation d'une nouvelle pizza pour la modifier
 				Pizza pizzaToModif = new Pizza();
 				
@@ -115,7 +144,7 @@ public class PizzeriaAdminConsoleApp  {
 				pizzaToModif.setCode(newCode);
 				pizzaToModif.setDésignation(newNom);
 				pizzaToModif.setPrix(newPrix);
-				
+				pizzaToModif.setCategoriePizza(type);
 				
 				try{
 					dao.updatePizza(codePizza, pizzaToModif);

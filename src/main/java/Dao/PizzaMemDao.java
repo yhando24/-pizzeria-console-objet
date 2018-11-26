@@ -5,19 +5,20 @@ import exception.DeletePizzaException;
 import exception.SavePizzaException;
 import exception.StockageException;
 import exception.UpdatePizzaException;
+import model.PizzaEnum;
 
 public class  PizzaMemDao implements IPizzaDao{
 	
 	
 	static Pizza [] pizzas = {
-			new Pizza("PEP","Péperoni",12.50),
-			new Pizza("MAR","Margherita",14.00),
-			new Pizza("REIN","La Reine",11.50),
-			new Pizza("FRO","La 4 fromages",12.00),
-			new Pizza("CAN","La cannibale",12.50),
-			new Pizza("SAV","La savoyarde",13.00),
-			new Pizza("ORI","L'orientale",13.50),
-			new Pizza("IND","L'indienne",14.00),
+			new Pizza("PEP","Péperoni",12.50, PizzaEnum.FROMAGE),
+			new Pizza("MAR","Margherita",14.00, PizzaEnum.FROMAGE),
+			new Pizza("REIN","La Reine",11.50, PizzaEnum.FROMAGE),
+			new Pizza("FRO","La 4 fromages",12.00, PizzaEnum.FROMAGE),
+			new Pizza("CAN","La cannibale",12.50, PizzaEnum.VIANDE),
+			new Pizza("SAV","La savoyarde",13.00, PizzaEnum.POISSON),
+			new Pizza("ORI","L'orientale",13.50, PizzaEnum.POISSON),
+			new Pizza("IND","L'indienne",14.00, PizzaEnum.FROMAGE),
 };
 	
 	
@@ -92,7 +93,6 @@ public class  PizzaMemDao implements IPizzaDao{
 		try {
 			pizza.dataControl();
 		} catch (StockageException e) {
-			System.out.println("DASDQDQSDDSDd");
 			success = false;
 		}
 		

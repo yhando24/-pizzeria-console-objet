@@ -1,6 +1,7 @@
 package classe;
 
 import exception.StockageException;
+import model.PizzaEnum;
 
 /**
  * 
@@ -18,7 +19,7 @@ public class Pizza {
 	private String code;
 	private String désignation;
 	private double prix;
-	
+	private PizzaEnum CategoriePizza;
 	private static  int compteur = 0;
 	
 	
@@ -34,11 +35,12 @@ public class Pizza {
 	 * @param prix : Prix en euros de la pizza
 	 * @param id : Identifiant unique qui ajoute un au compteur static
 	 */
-	public Pizza(String code, String désignation, double prix) {
+	public Pizza(String code, String désignation, double prix, PizzaEnum CategoriePizza) {
 		this.id = compteur++;
 		this.code = code;
 		this.désignation = désignation;
-		this.prix = prix;			
+		this.prix = prix;	
+		this.CategoriePizza = CategoriePizza;
 	}
 	
 	public Pizza() {
@@ -102,10 +104,22 @@ public class Pizza {
 		this.prix = prix;
 	}
 
+	
+	
+	public PizzaEnum getCategoriePizza() {
+		return CategoriePizza;
+	}
+
+	public void setCategoriePizza(PizzaEnum categoriePizza) {
+		CategoriePizza = categoriePizza;
+	}
+
 	@Override
 	public String toString() {
-		return code + " -> " + désignation + "("+ prix + "€)";
+		return code + " -> " + désignation + "("+ prix + "€). Elle est de type " +  CategoriePizza;
 	}
+	
+	
 	
 	public void dataControl() throws StockageException{
 		
