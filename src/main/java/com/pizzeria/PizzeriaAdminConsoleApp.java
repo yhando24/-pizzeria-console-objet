@@ -1,10 +1,12 @@
 package com.pizzeria;
 
+import java.util.Collections;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
+import Bean.Pizza;
 import Dao.PizzaMemDao;
-import classe.Pizza;
 import exception.DeletePizzaException;
 import exception.SavePizzaException;
 import exception.UpdatePizzaException;
@@ -15,6 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle; 
 import javafx.stage.Stage;
 import model.PizzaEnum;
+import triPizza.TriPrixCroissant;
+import triPizza.TriPrixDecroissant;
 import javafx.application.Application; 
 import javafx.scene.Scene; 
 import javafx.scene.layout.Pane; 
@@ -39,7 +43,7 @@ public class PizzeriaAdminConsoleApp  {
 	
 		PizzaMemDao dao = new PizzaMemDao();
 		
-		Pizza [] pizzas = dao.findAllPizzas();
+		List <Pizza> pizzas = dao.findAllPizzas();
 		
 		boolean continuer = true;
 		
@@ -49,6 +53,8 @@ public class PizzeriaAdminConsoleApp  {
 			System.out.println("2. Ajouter une nouvelle pizza");
 			System.out.println("3. Mettre à jour une pizza");
 			System.out.println("4. Supprimer une pizza");
+			System.out.println("5. Trier les pizza par prix decroissant");
+			System.out.println("6. Trier les pizza par prix Croissant");
 			System.out.println("99. Sortir ");
 
 	
@@ -90,7 +96,7 @@ public class PizzeriaAdminConsoleApp  {
 					dao.addPizza(pizzaToAdd);
 				} catch (SavePizzaException e1) {
 				
-				System.out.println(e1.getMessage());
+				System.err.println(e1.getMessage());
 					
 				// si le type de pizza existe pas on le met dans autre
 				} catch (IllegalArgumentException et) {
@@ -99,7 +105,7 @@ public class PizzeriaAdminConsoleApp  {
 					try {
 						dao.addPizza(pizzaToAdd);
 					} catch (SavePizzaException e) {
-						System.out.println(e.getMessage());
+						System.err.println(e.getMessage());
 					
 					}
 				}
@@ -134,7 +140,7 @@ public class PizzeriaAdminConsoleApp  {
 					// verification du type de pizza et presence du type
 					 type = PizzaEnum.valueOf(sc.nextLine().toUpperCase());
 				}catch (IllegalArgumentException et) {
-					System.out.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
+					System.err.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
 					 type = PizzaEnum.AUTRE;
 				}
 				// instanciation d'une nouvelle pizza pour la modifier
@@ -150,7 +156,7 @@ public class PizzeriaAdminConsoleApp  {
 					dao.updatePizza(codePizza, pizzaToModif);
 				}catch(UpdatePizzaException e) {
 					
-					System.out.println(e.getMessage());
+					System.err.println(e.getMessage());
 				}
 
 				break;
@@ -168,10 +174,28 @@ public class PizzeriaAdminConsoleApp  {
 				try {
 					dao.deletePizza(codePizzaAsupprimer);
 				} catch (DeletePizzaException e) {
-				 System.out.println(e.getMessage());
+				 System.err.println(e.getMessage());
 				}
 			
 					break;
+					
+					
+			case 5:
+				TriPrixCroissant tridecroissant = new TriPrixCroissant();
+				
+				Collections.sort(pizzas, tridecroissant);
+				System.out.println("Pizza trier par prix decroisant \r\n");
+				dao.listPizza();
+				break;
+				
+			case 6:
+				TriPrixDecroissant tricroissant = new TriPrixDecroissant();
+				
+				Collections.sort(pizzas, tricroissant);
+				System.out.println("Pizza trier par prix croisant \r\n");
+				dao.listPizza();
+				break;
+				
 			case 99:
 				System.out.println(" Au revoir");
 				continuer = false;

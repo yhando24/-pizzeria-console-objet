@@ -1,8 +1,9 @@
 package Dao;
 
 import java.util.InputMismatchException;
+import java.util.List;
 
-import classe.Pizza;
+import Bean.Pizza;
 import exception.DeletePizzaException;
 import exception.SavePizzaException;
 import exception.UpdatePizzaException;
@@ -10,7 +11,7 @@ import exception.UpdatePizzaException;
 public interface IPizzaDao {
 	
 
-	Pizza[] findAllPizzas();
+	List <Pizza> findAllPizzas();
 	void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
 	Pizza findPizzaByCode(String codePizza);
 	boolean isPizzaExists(String codePizza);

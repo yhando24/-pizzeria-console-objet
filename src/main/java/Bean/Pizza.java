@@ -1,4 +1,4 @@
-package classe;
+package Bean;
 
 import exception.StockageException;
 import model.PizzaEnum;
