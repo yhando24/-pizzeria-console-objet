@@ -6,6 +6,7 @@ import java.util.List;
 
 import Bean.Pizza;
 import exception.DeletePizzaException;
+import exception.NotExistingPizzaException;
 import exception.SavePizzaException;
 import exception.StockageException;
 import exception.UpdatePizzaException;
@@ -40,7 +41,13 @@ public class  PizzaMemDao implements IPizzaDao{
 
 	
 	public void updatePizza(String codePizza, Pizza pizzaToModif) throws UpdatePizzaException {	
-		Pizza pizza = findPizzaByCode(codePizza);
+		Pizza pizza;
+		try {
+			pizza = findPizzaByCode(codePizza);
+		} catch (NotExistingPizzaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Boolean exist = isPizzaExists(codePizza);
 		Boolean sucess = true;
 		if(exist) {
@@ -61,13 +68,13 @@ public class  PizzaMemDao implements IPizzaDao{
 
 	
 
-	public Pizza findPizzaByCode(String codePizza) {
+	public Pizza findPizzaByCode(String codePizza) throws NotExistingPizzaException {
 		for (Pizza pizza : pizzas) {
 			if(pizza.getCode().equals(codePizza)) {
 				return pizza;
 			}
 		}
-			return null;
+			throw new NotExistingPizzaException("Cette pizza n'existe pas");
 	}
 
 	

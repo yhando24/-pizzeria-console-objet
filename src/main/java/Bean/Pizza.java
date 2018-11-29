@@ -25,7 +25,7 @@ public class Pizza {
 	
 	
 	 private final int CODE_LENGHT = 4;
-	 private final int PRIX_MAX = 100;
+	 private final int PRIX_MAX = 30;
 	 private final int PRIX_MIN = 5;
 	
 	/**

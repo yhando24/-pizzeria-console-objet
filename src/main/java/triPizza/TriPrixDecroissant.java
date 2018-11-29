@@ -13,9 +13,9 @@ public class TriPrixDecroissant implements Comparator<Pizza>{
 
 		int ComparePrice = 0;
 		if(p1.getPrix()>p2.getPrix()) {
-			ComparePrice = 1;
-		}else {
 			ComparePrice = -1;
+		}else {
+			ComparePrice = 1;
 		}
 		return ComparePrice;
 	}

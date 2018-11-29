@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle; 
 import javafx.stage.Stage;
 import model.PizzaEnum;
-import triPizza.TriPrixCroissant;
+import triPizza.TriCodeCroissant;
 import triPizza.TriPrixDecroissant;
 import javafx.application.Application; 
 import javafx.scene.Scene; 
@@ -54,7 +54,7 @@ public class PizzeriaAdminConsoleApp  {
 			System.out.println("3. Mettre à jour une pizza");
 			System.out.println("4. Supprimer une pizza");
 			System.out.println("5. Trier les pizza par prix decroissant");
-			System.out.println("6. Trier les pizza par prix Croissant");
+			System.out.println("6. Trier les pizza par code Croissant");
 			System.out.println("99. Sortir ");
 
 	
@@ -64,11 +64,11 @@ public class PizzeriaAdminConsoleApp  {
 		
 			switch (choix) {
 			
-			case 1:
+			case 1: // liste les pizza
 					dao.listPizza();
 					break;
 				
-			case 2:
+			case 2: // pour ajouter une pizza
 				System.out.println(" Ajout d'une nouvelle pizza");
 				// remise a 0 du scanner
 				sc.nextLine();
@@ -111,7 +111,7 @@ public class PizzeriaAdminConsoleApp  {
 				}
 				break;
 				
-			case 3:
+			case 3: // pour la mise a jour d'une pizza
 				
 				
 				System.out.println(" Mise à jour d'une pizza");
@@ -161,7 +161,7 @@ public class PizzeriaAdminConsoleApp  {
 
 				break;
 				
-			case 4:		
+			case 4:		// suppression d'une pizza
 				
 				
 				System.out.println(" Suppression d'une pizza");
@@ -180,19 +180,20 @@ public class PizzeriaAdminConsoleApp  {
 					break;
 					
 					
-			case 5:
-				TriPrixCroissant tridecroissant = new TriPrixCroissant();
+			case 5: 
+				TriPrixDecroissant triDecroissant = new TriPrixDecroissant();
 				
-				Collections.sort(pizzas, tridecroissant);
+				Collections.sort(pizzas, triDecroissant);
 				System.out.println("Pizza trier par prix decroisant \r\n");
 				dao.listPizza();
 				break;
+			
 				
 			case 6:
-				TriPrixDecroissant tricroissant = new TriPrixDecroissant();
+				TriCodeCroissant tridecroissant = new TriCodeCroissant();
 				
-				Collections.sort(pizzas, tricroissant);
-				System.out.println("Pizza trier par prix croisant \r\n");
+				Collections.sort(pizzas, tridecroissant);
+				System.out.println("Pizza trier par code croisant \r\n");
 				dao.listPizza();
 				break;
 				
