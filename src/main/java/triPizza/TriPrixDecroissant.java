@@ -2,7 +2,7 @@ package triPizza;
 
 import java.util.Comparator;
 
-import Bean.Pizza;
+import model.bean.Pizza;
 
 public class TriPrixDecroissant implements Comparator<Pizza>{
 

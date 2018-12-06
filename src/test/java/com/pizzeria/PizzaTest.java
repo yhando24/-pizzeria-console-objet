@@ -12,13 +12,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Bean.Pizza;
-import Dao.PizzaMemDao;
 import exception.DeletePizzaException;
 import exception.NotExistingPizzaException;
 import exception.StockageException;
 import exception.UpdatePizzaException;
-import model.PizzaEnum;
+import model.bean.Pizza;
+import model.dao.PizzaEnum;
+import model.dao.PizzaMemDao;
 
 
 

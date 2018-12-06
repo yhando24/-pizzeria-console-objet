@@ -1,36 +1,15 @@
 package com.pizzeria;
 
 import java.util.Collections;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import Bean.Pizza;
-import Dao.PizzaMemDao;
 import exception.DeletePizzaException;
-import exception.SavePizzaException;
 import exception.UpdatePizzaException;
-import javafx.application.Application; 
-import javafx.scene.Scene; 
-import javafx.scene.layout.Pane; 
-import javafx.scene.paint.Color; 
-import javafx.scene.shape.Rectangle; 
-import javafx.stage.Stage;
-import model.PizzaEnum;
+import model.bean.Pizza;
+import model.dao.PizzaMemDao;
 import triPizza.TriCodeCroissant;
-import triPizza.TriPrixDecroissant;
-import javafx.application.Application; 
-import javafx.scene.Scene; 
-import javafx.scene.layout.Pane; 
-import javafx.scene.paint.Color; 
-import javafx.scene.shape.Rectangle; 
-import javafx.stage.Stage; 
-import javafx.application.Application; 
-import javafx.scene.Scene; 
-import javafx.scene.layout.Pane; 
-import javafx.scene.paint.Color; 
-import javafx.scene.shape.Rectangle; 
-import javafx.stage.Stage; 
+import triPizza.TriPrixDecroissant; 
   
 
 
@@ -89,26 +68,26 @@ public class PizzeriaAdminConsoleApp  {
 			
 				
 				
-				try {
-					// verification du type de pizza et presence du type
-					PizzaEnum type = PizzaEnum.valueOf(sc.nextLine().toUpperCase());
-					Pizza pizzaToAdd = new Pizza(code, nom, prix, type);
-					dao.addPizza(pizzaToAdd);
-				} catch (SavePizzaException e1) {
-				
-				System.err.println(e1.getMessage());
-					
-				// si le type de pizza existe pas on le met dans autre
-				} catch (IllegalArgumentException et) {
-					System.out.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
-					Pizza pizzaToAdd = new Pizza(code, nom, prix, PizzaEnum.AUTRE);
-					try {
-						dao.addPizza(pizzaToAdd);
-					} catch (SavePizzaException e) {
-						System.err.println(e.getMessage());
-					
-					}
-				}
+//				try {
+//					// verification du type de pizza et presence du type
+//					//PizzaEnum type = PizzaEnum.valueOf(sc.nextLine().toUpperCase());
+//					Pizza pizzaToAdd = new Pizza(code, nom, prix, type);
+//					dao.addPizza(pizzaToAdd);
+//				} catch (SavePizzaException e1) {
+//				
+//				System.err.println(e1.getMessage());
+//					
+//				// si le type de pizza existe pas on le met dans autre
+//				} catch (IllegalArgumentException et) {
+//					System.out.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
+//					Pizza pizzaToAdd = new Pizza(code, nom, prix, PizzaEnum.AUTRE);
+//					try {
+//						dao.addPizza(pizzaToAdd);
+//					} catch (SavePizzaException e) {
+//						System.err.println(e.getMessage());
+//					
+//					}
+//				}
 				break;
 				
 			case 3: // pour la mise a jour d'une pizza
@@ -134,15 +113,15 @@ public class PizzeriaAdminConsoleApp  {
 				Double newPrix = sc.nextDouble();
 				sc.nextLine();
 				System.out.println(" Veuillez saisir la categorie :");	
-				PizzaEnum type;
+//				PizzaEnum type;
 				
-				try {
-					// verification du type de pizza et presence du type
-					 type = PizzaEnum.valueOf(sc.nextLine().toUpperCase());
-				}catch (IllegalArgumentException et) {
-					System.err.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
-					 type = PizzaEnum.AUTRE;
-				}
+//				try {
+//					// verification du type de pizza et presence du type
+//					 type = PizzaEnum.valueOf(sc.nextLine().toUpperCase());
+//				}catch (IllegalArgumentException et) {
+//					System.err.println("Ce type de pizza n'existe pas, pizza ajoutée a la categorie Autre");
+//					 type = PizzaEnum.AUTRE;
+//				}
 				// instanciation d'une nouvelle pizza pour la modifier
 				Pizza pizzaToModif = new Pizza();
 				
@@ -150,7 +129,7 @@ public class PizzeriaAdminConsoleApp  {
 				pizzaToModif.setCode(newCode);
 				pizzaToModif.setDésignation(newNom);
 				pizzaToModif.setPrix(newPrix);
-				pizzaToModif.setCategoriePizza(type);
+			//	pizzaToModif.setCategoriePizza(type);
 				
 				try{
 					dao.updatePizza(codePizza, pizzaToModif);

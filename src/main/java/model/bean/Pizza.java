@@ -1,7 +1,6 @@
-package Bean;
+package model.bean;
 
 import exception.StockageException;
-import model.PizzaEnum;
 
 /**
  * 
@@ -19,7 +18,7 @@ public class Pizza {
 	private String code;
 	private String désignation;
 	private double prix;
-	private PizzaEnum CategoriePizza;
+	private Categorie CategoriePizza;
 	private static  int compteur = 0;
 	
 	
@@ -35,7 +34,7 @@ public class Pizza {
 	 * @param prix : Prix en euros de la pizza
 	 * @param id : Identifiant unique qui ajoute un au compteur static
 	 */
-	public Pizza(String code, String désignation, double prix, PizzaEnum CategoriePizza) {
+	public Pizza(String code, String désignation, double prix, Categorie CategoriePizza) {
 		this.id = compteur++;
 		this.code = code;
 		this.désignation = désignation;
@@ -106,11 +105,11 @@ public class Pizza {
 
 	
 	
-	public PizzaEnum getCategoriePizza() {
+	public Categorie getCategoriePizza() {
 		return CategoriePizza;
 	}
 
-	public void setCategoriePizza(PizzaEnum categoriePizza) {
+	public void setCategoriePizza(Categorie categoriePizza) {
 		CategoriePizza = categoriePizza;
 	}
 

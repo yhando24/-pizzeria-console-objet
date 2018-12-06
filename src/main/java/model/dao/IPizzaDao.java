@@ -1,13 +1,13 @@
-package Dao;
+package model.dao;
 
 import java.util.InputMismatchException;
 import java.util.List;
 
-import Bean.Pizza;
 import exception.DeletePizzaException;
 import exception.NotExistingPizzaException;
 import exception.SavePizzaException;
 import exception.UpdatePizzaException;
+import model.bean.Pizza;
 
 public interface IPizzaDao {
 	
