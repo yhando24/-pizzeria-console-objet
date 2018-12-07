@@ -17,7 +17,7 @@ public class Pizza {
 	private int id;
 	private String code;
 	private String désignation;
-	private double prix;
+	private float prix;
 	private Categorie CategoriePizza;
 	private static  int compteur = 0;
 	
@@ -34,7 +34,7 @@ public class Pizza {
 	 * @param prix : Prix en euros de la pizza
 	 * @param id : Identifiant unique qui ajoute un au compteur static
 	 */
-	public Pizza(String code, String désignation, double prix, Categorie CategoriePizza) {
+	public Pizza(String code, String désignation, float prix, Categorie CategoriePizza) {
 		this.id = compteur++;
 		this.code = code;
 		this.désignation = désignation;
@@ -92,14 +92,14 @@ public class Pizza {
 	 * 
 	 * @return le prix en float de la pizza en euro
 	 */
-	public double getPrix() {
+	public float getPrix() {
 		return prix;
 	}
 	/**
 	 * 
 	 * @param prix de la pizza en float
 	 */
-	public void setPrix(double prix) {
+	public void setPrix(float prix) {
 		this.prix = prix;
 	}
 
@@ -115,7 +115,7 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		return code + " -> " + désignation + "("+ prix + "€). Elle est de type " +  CategoriePizza;
+		return  "id " + id + " => " + code + " -> " + désignation + "("+ prix + "€). Elle est de type " +  CategoriePizza;
 	}
 	
 	
@@ -136,7 +136,6 @@ public class Pizza {
 		}
 		
 		if(!message.isEmpty() ||  message.trim().length() > 0) {
-			System.out.println("dans le dataControle");
 			throw new StockageException(message);
 		}
 	}

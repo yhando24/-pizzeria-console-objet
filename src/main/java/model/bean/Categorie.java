@@ -9,8 +9,10 @@ public class Categorie {
 		
 		
 	}
+	public Categorie(int id) {
+		this.id = id;
+	}
 	public Categorie(int id, String nom) {
-		super();
 		this.id = id;
 		this.nom = nom;
 	}
@@ -30,7 +32,7 @@ public class Categorie {
 	
 	@Override
 	public String toString() {
-		return nom;
+		return  "categorie : "  +  nom;
 	}
 	
 	

@@ -1,5 +1,6 @@
-package model.dao;
+package model.dao.pizza;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
@@ -13,11 +14,11 @@ public interface IPizzaDao {
 	
 
 	List <Pizza> findAllPizzas();
-	void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
-	Pizza findPizzaByCode(String codePizza) throws NotExistingPizzaException;
-	boolean isPizzaExists(String codePizza);
+	void updatePizza(int id, Pizza pizza) throws UpdatePizzaException;
+	Pizza findPizzaById(int id) throws NotExistingPizzaException;
+	boolean isPizzaExists(int id);
 	void addPizza(Pizza pizza) throws SavePizzaException;
-	void deletePizza(String codePizza) throws DeletePizzaException;
-	void listPizza();
+	void deletePizza(int id) throws DeletePizzaException;
+	void listPizza(ArrayList <Pizza> pizzas);
 	
 }

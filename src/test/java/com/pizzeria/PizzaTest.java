@@ -18,7 +18,7 @@ import exception.StockageException;
 import exception.UpdatePizzaException;
 import model.bean.Pizza;
 import model.dao.PizzaEnum;
-import model.dao.PizzaMemDao;
+import model.dao.pizza.PizzaMemDao;
 
 
 
