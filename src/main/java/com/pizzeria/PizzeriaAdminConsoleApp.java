@@ -199,7 +199,7 @@ public class PizzeriaAdminConsoleApp  {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				ResetBDD.delete(co );
+				ResetBDD.delete(co);
 				ResetBDD.add(co);
 				break;	
 				
